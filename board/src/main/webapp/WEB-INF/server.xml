@@ -95,8 +95,8 @@
 		<security:intercept-url method="DELETE" pattern="/posts/{id}" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url method="POST" pattern="/users" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
 		<security:intercept-url method="GET" pattern="/login" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
+		<security:intercept-url method="POST" pattern="/login" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
 		<security:intercept-url method="GET" pattern="/logout" access="hasRole('ROLE_USER')"/>
-		<security:intercept-url method="POST" pattern="/signup" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
 		<security:intercept-url method="GET" pattern="/signup" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')" />
 		<security:form-login login-page="/login" />
 		<security:logout logout-url="/logout"  invalidate-session="true"/>
