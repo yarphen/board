@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="POSTS")
@@ -21,6 +22,7 @@ public class Post {
 		this.id = id;
 	}
 	
+	@Pattern(regexp=".{10,}")
 	@Column(name="text")
 	private String text;
 
