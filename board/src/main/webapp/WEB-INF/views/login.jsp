@@ -24,13 +24,13 @@ ul , div {
 
 	<div class="container">
 		<h2>LOG IN PLEASE:</h2>
-		<c:if test="${param.error}">
+		<c:if test="${param.error!=null}">
 			<div>Invalid username and password.</div>
 		</c:if>
-		<c:if test="${param.logout}">
+		<c:if test="${param.logout!=null}">
 			<div>You have been logged out.</div>
 		</c:if>
-		<form action="login" method="POST">
+		<form action="${pageContext.request.contextPath}/login" method="POST">
 			<div class="form-group">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<label for="username">User name:</label>
