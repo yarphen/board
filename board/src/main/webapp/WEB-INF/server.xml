@@ -86,5 +86,27 @@
 			</list>
 		</property>
 	</beans:bean>
+	<security:global-method-security
+		secured-annotations="enabled" jsr250-annotations="disabled"
+		pre-post-annotations="enabled" />
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url method="GET" pattern="/" access="permitAll"/>
+		<security:intercept-url method="POST" pattern="/posts" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url method="DELETE" pattern="/posts/{id}" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url method="POST" pattern="/users" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
+		<security:intercept-url method="GET" pattern="/login" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
+		<security:intercept-url method="GET" pattern="/logout" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url method="POST" pattern="/signup" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')"/>
+		<security:intercept-url method="GET" pattern="/signup" access="isAnonymous() or hasRole('ROLE_ANONYMOUS')" />
+		<security:form-login login-page="/login" />
+		<security:logout logout-url="/logout"  invalidate-session="true"/>
+		<security:access-denied-handler error-page="/forbidden"/>
+	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="userService">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<beans:bean id="userService" class="com.sheremet.simpleboard.models.UserServiceImpl" />
 	<beans:bean id="postService" class="com.sheremet.simpleboard.models.PostServiceImpl" />
 </beans:beans>
